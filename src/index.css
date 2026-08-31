@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+/* 1. Reset standard layout application viewport frame height and document basic styling blocks */
+html, body, #root { height: 100%; }
+body { background: #f8fafc; color: #0f172a; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+
+/* 2. Welcome Splash Loading Screen Core Keyframe Animation Engines */
+@keyframes splashLogoEnter {
+  0% { opacity: 0; transform: translateY(20px) scale(0.92); filter: blur(6px); }
+  60% { opacity: 1; transform: translateY(-4px) scale(1.02); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+@keyframes splashLogoPulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+}
+@keyframes splashGlowMove {
+  0%,100% { transform: translate(-10%,-8%) scale(1); opacity: .3; }
+  50% { transform: translate(8%,6%) scale(1.1); opacity: .5; }
+}
+
+/* 3. Welcome screen layout utility tracking classes configuration links linking */
+.splash-welcome-text { animation: splashLogoEnter 900ms cubic-bezier(.2,.7,.2,1) 250ms both; }
+.splash-logo-wrap { position: relative; z-index: 2;
+  animation: splashLogoEnter 900ms cubic-bezier(.2,.7,.2,1) both, splashLogoPulse 2200ms ease-in-out 950ms infinite;
+}
+.splash-bg-glow { position:absolute; width:min(70vw,560px); aspect-ratio:1/1; border-radius:9999px;
+  background: radial-gradient(circle, rgba(16,185,129,.22) 0%, rgba(16,185,129,0) 68%);
+  animation: splashGlowMove 3200ms ease-in-out infinite; z-index:1; pointer-events:none; }
+
+.fade-slide { transition: opacity .8s ease, transform .8s ease; }
+
+/* ==========================================================================
+   4. SEAMLESS INFINITE MARQUEE SCROLL ENGINE (Side blur masks fully disabled)
+   ========================================================================== */
+
+/* Left-to-Right layout scroll loop tracking timeline scale shift shift */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } 
+}
+
+/* Inverted Right-to-Left Arabic layout scroll loop mirror timeline scale shift shift */
+@keyframes marquee-rtl {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
+}
+
+/* Horizontal rolling infinite moving track ribbon container node setup */
+.marquee-track {
+  display: flex !important;
+  width: max-content !important;
+  animation: marquee linear infinite;
+}
+
+/* Flip running loop movement flows instantly whenever the active page orientation turns RTL */
+[dir="rtl"] .marquee-track {
+  animation: marquee-rtl linear infinite;
+}
+
+/* ==========================================================================
+   5. JS CONSTRUCTIONS SPLASH — "JS" SPLIT-OPEN REVEAL ENGINE
+   ========================================================================== */
+
+@keyframes curtainSlide {
+  0%   { transform: scaleX(1); border-radius: 0; }
+  100% { transform: scaleX(0); border-radius: 9999px; }
+}
+@keyframes letterEnter {
+  0%   { opacity: 0; transform: translateY(30px) scale(0.6) rotate(-6deg); filter: blur(8px); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0); filter: blur(0); }
+}
+@keyframes letterSplitLeft {
+  0%   { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(-70vw); opacity: 0; }
+}
+@keyframes letterSplitRight {
+  0%   { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(70vw); opacity: 0; }
+}
+@keyframes miniLogoIn {
+  0%   { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeUpCenter {
+  0%   { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes loaderSpin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.splash-panel {
+  position: absolute; top: 0; bottom: 0; width: 50vw; z-index: 4;
+  overflow: hidden;
+}
+.splash-panel-left {
+  left: 0;
+  background: linear-gradient(120deg, #0b1220 0%, #0d2a20 100%);
+  box-shadow: inset -12px 0 30px rgba(0,0,0,.4);
+}
+.splash-panel-right {
+  right: 0;
+  background: linear-gradient(-120deg, #0b1220 0%, #0d2a20 100%);
+  box-shadow: inset 12px 0 30px rgba(0,0,0,.4);
+}
+.splash-panel-glow-left,
+.splash-panel-glow-right {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 45%, rgba(16,185,129,.16) 0%, rgba(16,185,129,0) 70%);
+}
+[dir="rtl"] .splash-panel-left { left: 0; right: auto; }
+[dir="rtl"] .splash-panel-right { right: 0; left: auto; }
+
+/* Open from the CENTER seam outward to the SIDES */
+.splash-leaving .splash-panel-left {
+  animation: panelOpenLeft 1100ms cubic-bezier(.65,0,.35,1) 80ms forwards;
+}
+.splash-leaving .splash-panel-right {
+  animation: panelOpenRight 1100ms cubic-bezier(.65,0,.35,1) 80ms forwards;
+}
+@keyframes panelOpenLeft {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+@keyframes panelOpenRight {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+.splash-bg-grid {
+  position: absolute; inset: 0; z-index: 3;
+  background-image:
+    linear-gradient(rgba(16,185,129,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16,185,129,.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,.85) 0%, rgba(0,0,0,.2) 70%);
+  pointer-events: none;
+}
+
+/* Centered column: JS letters on top, tagline + loader below */
+.splash-column {
+  position: absolute; inset: 0; z-index: 6;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  pointer-events: none;
+}
+
+.splash-wordmark {
+  gap: 0.04em;
+  direction: ltr;
+  animation: wordmarkIn 900ms cubic-bezier(.2,.8,.2,1) both;
+}
+.splash-letter {
+  display: inline-block;
+  font-size: clamp(8rem, 36vw, 22rem);
+  font-weight: 900;
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 3px rgba(52,211,153,.95);
+  text-shadow: 0 0 60px rgba(16,185,129,.5);
+}
+.splash-letter-j { animation: letterEnter 950ms cubic-bezier(.2,.8,.2,1) 120ms both; }
+.splash-letter-s { animation: letterEnter 950ms cubic-bezier(.2,.8,.2,1) 220ms both; }
+
+/* On open: letters slide sideways (stay at the same height, never go down)
+   while the subline below fades away and the web reveals. */
+.splash-leaving .splash-letter-j {
+  animation: letterSplitLeft 1000ms cubic-bezier(.6,.05,.28,1) 60ms both;
+}
+.splash-leaving .splash-letter-s {
+  animation: letterSplitRight 1000ms cubic-bezier(.6,.05,.28,1) 120ms both;
+}
+
+.splash-subline {
+  margin-top: 1.25rem;
+  display: flex; flex-direction: column; align-items: center;
+  animation: fadeUpCenter 700ms ease 500ms both;
+}
+.splash-leaving .splash-subline {
+  animation: sublineFade 450ms ease 80ms both;
+}
+@keyframes sublineFade {
+  0%   { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-12px); }
+}
+
+.splash-loader-ring {
+  width: 40px; height: 40px; border-radius: 9999px;
+  border: 3px solid rgba(52,211,153,.15);
+  border-top-color: #10b981;
+  animation: loaderSpin 1s linear infinite;
+}
+
+/* ==========================================================================
+   6. HOME HERO — DARK + EMERALD INTERIOR / CONTRACTING THEME
+   ========================================================================== */
+
+@keyframes blueprintDrift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+@keyframes heroGlowPulse {
+  0%,100% { opacity: .35; transform: translate(-50%,-50%) scale(1); }
+  50%     { opacity: .6;  transform: translate(-50%,-50%) scale(1.15); }
+}
+@keyframes heroReveal {
+  0%   { opacity: 0; transform: translateY(26px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatY {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-8px); }
+}
+
+.hero-blueprint {
+  background-image:
+    linear-gradient(rgba(16,185,129,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16,185,129,.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+  animation: blueprintDrift 24s linear infinite;
+  opacity: .6;
+}
+.hero-glow {
+  top: 30%; left: 50%; width: min(70vw, 640px); aspect-ratio: 1/1;
+  border-radius: 9999px; pointer-events: none;
+  background: radial-gradient(circle, rgba(16,185,129,.20) 0%, rgba(16,185,129,0) 66%);
+  animation: heroGlowPulse 7s ease-in-out infinite;
+}
+.hero-reveal {
+  animation: heroReveal 900ms cubic-bezier(.2,.8,.2,1) 150ms both;
+}
+.craft-chip {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .5rem .9rem; border-radius: 9999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(52,211,153,.3);
+  color: #e2e8f0; font-size: .8rem; font-weight: 600;
+  backdrop-filter: blur(8px);
+  animation: floatY 4s ease-in-out infinite;
+}
